@@ -1,5 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifndef _WIN32
+	#include <unistd.h>
+#endif
+
 #include "error_codes.h"
 #include "utils.h"
 #include "macro.h"
