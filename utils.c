@@ -3,6 +3,14 @@
 #include <ctype.h>
 #include "utils.h"
 
+#ifdef _WIN32
+    #define PATH_SEPARATOR '\\'
+#else
+    #define PATH_SEPARATOR '/'
+#endif
+
+#define TEST_FILES_PATH "testfiles"
+
 int is_whitespaces(char *word) {
     while (*word && isspace(*word)) word++;
     return (*word == '\0' || *word == '\n');
@@ -80,23 +88,16 @@ ErrorCode get_number(char *word, int *value) {
 
 }
 
-FILE * open_file (char *filename, char *format) {
-	FILE *f;
-	
-	f = fopen(filename, format);
-	if (!f)
-	{
-		printf("File %s does not exist.\n", filename);
-		return NULL;
-	}
-	return f;
+int is_filename_too_long(char *base) {
+    /* add 1 character for path separator, 3 for extension, 1 for dot */
+    if ((strlen(TEST_FILES_PATH) + strlen(base) + 5) >= MAX_FILE_NAME) {
+        return 1;
+    }
+    return 0;
 }
 
 void get_filename(char *base, char *extension, char *filename) {
-    strcpy(filename, "testfiles\\");
-	strcat(filename, base);
-	strcat(filename, ".");
-	strcat(filename, extension);
+    sprintf(filename,"%s%c%s.%s", TEST_FILES_PATH, PATH_SEPARATOR, base, extension);
 }
 
 int is_line_too_long(FILE *file, char *line) {
@@ -115,4 +116,16 @@ int is_line_too_long(FILE *file, char *line) {
         return 1;
     }
     return 0;
+}
+
+char * my_strdup(char *string) {
+    char *copy;
+    if (string == NULL) {
+        return NULL;
+    }
+    copy = malloc(strlen(string) + 1);
+    if (copy) {
+        strcpy(copy, string);
+    }
+    return copy;
 }

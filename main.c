@@ -6,8 +6,6 @@
 #include "process.h"
 #include "symbols.h"
 
-#define NAME_LEN 50
-
 /**
  * This program compiles an assembler file into machine code.
  * It performs several processing phases on the code:
@@ -50,9 +48,13 @@ int main(int argc, char **argv)
     for (i = 1; i < argc; i++)
 	{
 		/* Open source file */
+		if (is_filename_too_long(argv[i])) {
+			is_error(ERR_FILE_NAME_TOO_LONG, NULL, argv[i], 0, NULL);
+			continue;
+		}
 		get_filename(argv[i], "as", source_filename);
 		printf("Building file %s...\n", source_filename);
-		source = open_file(source_filename, "r");
+		source = fopen(source_filename, "r");
 		if (!source) {
 			is_error(ERR_FILE_NOT_EXIST, NULL, source_filename, 0, NULL);
 			continue;
@@ -60,7 +62,7 @@ int main(int argc, char **argv)
 
 		/* Create file for processed macros */
 		get_filename(argv[i], "am", destination_filename);
-		destination = open_file(destination_filename, "w+");
+		destination = fopen(destination_filename, "w+");
 		if (!destination) {
 			is_error(ERR_FILE_CANNOT_CREATE, NULL, destination_filename, 0, NULL);
 			continue;
@@ -81,7 +83,7 @@ int main(int argc, char **argv)
 
 		/* First process: resolve symbols */
 		get_filename(argv[i], "am", source_filename);
-		source = open_file(source_filename, "r");
+		source = fopen(source_filename, "r");
 		if (!source) {
 			is_error(ERR_FILE_NOT_EXIST, NULL, source_filename, 0, NULL);
 			purge_macros();
@@ -115,14 +117,14 @@ int main(int argc, char **argv)
 		/* Dump all files */
 		printf("Generating output files...\n");
 		get_filename(argv[i], "ob", destination_filename);
-		destination = open_file(destination_filename, "w+");
+		destination = fopen(destination_filename, "w+");
 		purge_and_dump_assembly(destination);
 		fclose(destination);
 
 		/* If external symbols exist, generate an extern file */
 		if (has_extern()) {
 			get_filename(argv[i], "ext", destination_filename);
-			destination = open_file(destination_filename, "w+");
+			destination = fopen(destination_filename, "w+");
 			dump_extern(destination);
 			fclose(destination);
 		}
@@ -130,7 +132,7 @@ int main(int argc, char **argv)
 		/* If entry symbols exist, generate an entry file */
 		if (has_entry()) {
 			get_filename(argv[i], "ent", destination_filename);
-			destination = open_file(destination_filename, "w+");
+			destination = fopen(destination_filename, "w+");
 			dump_entry(destination);
 			fclose(destination);
 		}
@@ -143,4 +145,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-

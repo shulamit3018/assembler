@@ -27,6 +27,7 @@ void print_error(ErrorCode error, char *filename, int line_number, char *error_c
 	switch(error)
 	{
 		case ERR_FILE_NOT_EXIST: printf("file does not exist"); break;
+		case ERR_FILE_NAME_TOO_LONG: printf("file name is too long"); break;
 		case ERR_FILE_CANNOT_CREATE: printf("cannot create file"); break;
 		case ERR_OUT_OF_MEMORY: printf("out of memory"); break;
 		case ERR_INTERNAL_ASSERT: printf("internal error"); break;

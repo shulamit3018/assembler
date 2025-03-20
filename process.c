@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "symbols.h"
 
+#define DETAILS_LEN 20
+
 int first_process(char *filename, FILE *file)
 {
 	int line_number = 0;

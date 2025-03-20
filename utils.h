@@ -5,7 +5,7 @@
 #include "error_codes.h"
 
 #define LINE_LEN 81 /* including zero termination */
-#define MAX_FILE_NAME 128 /* Maximum length for a file name */
+#define MAX_FILE_NAME 100
 
 /* Indicates whether this should be the last word in line */
 typedef enum {
@@ -47,12 +47,11 @@ Parses a numeric operand and extracts its value.
 ErrorCode get_number(char *word, int *value);
 
 /**
-Opens a file with the given name and mode.  
-   @param filename: Name of the file.  
-   @param format: Opening mode (e.g., "r", "w").  
-   @return pointer to the opened file, or NULL on failure.
+Checks if a file name with path is too long.
+   @param base: Base file name.
+   @return 1 if file name is too long, 0 otherwise.
 */
-FILE * open_file (char *filename, char *format);
+int is_filename_too_long(char *base);
 
 /**
 Generates a file name with the given extension.  
@@ -69,5 +68,10 @@ Checks if a line exceeds the allowed length.
    @return 1 if the line is too long, 0 otherwise.
 */
 int is_line_too_long(FILE *file, char *line);
+
+/**
+Implement strdup since it is not defined for ANSI C
+ */
+char * my_strdup(char *string);
 
 #endif /* UTILS_H */

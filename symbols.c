@@ -10,7 +10,7 @@
 
 /* Symbol table --------------------------------------------- */
 
-#define SYMBOL_LEN 31 /*The maximum length of a symbol*/
+#define SYMBOL_LEN 31
 
 /* A symbol definition */ 
 typedef struct symbol_t {
@@ -76,7 +76,7 @@ ErrorCode add_symbol(char *name, int address, storage_t storage, int is_entry) {
         return ERR_OUT_OF_MEMORY;
     }
 
-    symbol->name = strdup(name);
+    symbol->name = my_strdup(name);
 	symbol->address = address;
     symbol->storage = storage;
     symbol->is_entry = is_entry;

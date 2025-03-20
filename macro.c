@@ -148,7 +148,7 @@ ErrorCode add_macro(char *name) {
         return ERR_OUT_OF_MEMORY;
     }
 
-    new_macro->name = strdup(name);
+    new_macro->name = my_strdup(name);
 	new_macro->content = NULL;
     new_macro->next = macro_list;
     macro_list = new_macro;
@@ -162,7 +162,7 @@ ErrorCode add_macro_content(char *name, char *content) {
         if (strcmp(current->name, name) == 0) {
 			/* Append content to the existing macro */
 			if (current->content == NULL) {
-				current->content = strdup(content);
+				current->content = my_strdup(content);
 			}
 			else {
 				current->content = (char *)realloc(current->content, strlen(current->content) + strlen(content) + 1);

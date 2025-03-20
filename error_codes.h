@@ -1,14 +1,13 @@
 #ifndef ERROR_CODES_H
 #define ERROR_CODES_H
 
-#define DETAILS_LEN 20
-
 /* Possible errors */
 typedef enum {
     SUCCESS,
 
     /* General errors */
     ERR_FILE_NOT_EXIST,
+    ERR_FILE_NAME_TOO_LONG,
     ERR_FILE_CANNOT_CREATE,
     ERR_OUT_OF_MEMORY,
     ERR_INTERNAL_ASSERT,
