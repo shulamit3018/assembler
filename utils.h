@@ -39,6 +39,14 @@ Extracts the next comma
 ErrorCode get_comma(char *line, char ** next_word);
 
 /**
+Parses a numeric operand and extracts its value.
+	@param word: The operand string containing a number.
+	@param value: A pointer to store the extracted numeric value.
+	@return An error code indicating success or failure.
+*/
+ErrorCode get_number(char *word, int *value);
+
+/**
 Opens a file with the given name and mode.  
    @param filename: Name of the file.  
    @param format: Opening mode (e.g., "r", "w").  

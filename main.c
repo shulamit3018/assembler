@@ -8,6 +8,29 @@
 
 #define NAME_LEN 50
 
+/**
+ * This program compiles an assembler file into machine code.
+ * It performs several processing phases on the code:
+ * 1. Macro Preprocessing:
+ *    Performed in the function macro_process.
+ *    Collects macro definitions and replaces their references with their content.
+ * 2. Symbol Resolution:
+ *    Performed in the function first_process.
+ *    Collects labels and stores them as symbol definitions based on code & data memory addresses.
+ * 3. Assembly:
+ *    Performed in the function second_process.
+ *    Resolves symbols and generates machine code.
+ * Finally, the program outputs the machine code, as well as external and entry definitions, into files.
+ * 
+ * The program consists of several modules:
+ * - Macro: Handles macro preprocessing.
+ * - Process: Manages the main compilation logic.
+ * - Assembler: Constructs the machine code for both code and data.
+ * - Language: Defines instructions and syntax rules.
+ * - Symbol: Manages the symbol table.
+ * - Utils: Provides various utility functions.
+ * - Error Codes: Handles error reporting.
+ */
 int main(int argc, char **argv)
 {
     FILE *source, *destination;

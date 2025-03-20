@@ -8,7 +8,9 @@
 
 /**
 First processing phase on the given file:
-Scans the file, collects labels, and determines memory addresses.
+Collects labels, and saves them as symbol definitions 
+based on code & data memory addresses.
+
 	@param filename: The name of the file being processed.  
 	@param file: A pointer to the opened file for processing.  
 	@return 0 on success, 1 on failure.
@@ -70,31 +72,5 @@ ErrorCode process_operand(
 	coding_t *are, 
 	addressing_t *addressing
 );
-
-/**
-Sets the register value for an operand.
-	@param assembly: A pointer to the assembly structure.
-	@param reg: The register number.
-	@param i_operand: The index of the operand in the current instruction.
-	@param number_of_operands: The total number of operands in the instruction.
-*/
-void set_reg(assembly_t *assembly, int reg, int i_operand, int number_of_operands);
-
-/**
-Sets the addressing mode for an operand.
-	@param assembly: A pointer to the assembly structure.
-	@param addressing: The determined addressing mode.
-	@param i_operand: The index of the operand in the current instruction.
-	@param number_of_operands: The total number of operands in the instruction.
-*/
-void set_addressing(assembly_t *assembly, int addressing, int i_operand, int number_of_operands);
-
-/**
-Parses a numeric operand and extracts its value.
-	@param word: The operand string containing a number.
-	@param value: A pointer to store the extracted numeric value.
-	@return An error code indicating success or failure.
-*/
-ErrorCode get_number(char *word, int *value);
 
 #endif /* PROCESS_H */

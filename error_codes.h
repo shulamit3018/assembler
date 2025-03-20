@@ -71,13 +71,4 @@ Checks if an error occurred and updates the error state if applicable.
 */
 int is_error(ErrorCode error, int * error_state, char *filename, int line_number, char *error_context);
 
-/**
-Retrieves a formatted string describing the operand details.
-Used when reporting errors related to operands.
-    @param i_operand The index of the operand being processed.
-    @param n_operand The total number of expected operands.
-    @return A string describing the operand position (e.g., "first operand").
-*/
-char *get_operand_details(int i_operand, int n_operand);
-
 #endif /* ERROR_CODES_H */

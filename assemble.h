@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "error_codes.h"
+#include "language.h"
 
 /* A machine word definition */ 
 typedef union {
@@ -37,6 +38,24 @@ Adds data to the data section.
 	@return: Error code indicating success or failure.
 */
 ErrorCode add_data(assembly_t assembly);
+
+/**
+Sets the register value for an operand.
+	@param assembly: A pointer to the assembly structure.
+	@param reg: The register number.
+	@param i_operand: The index of the operand in the current instruction.
+	@param number_of_operands: The total number of operands in the instruction.
+*/
+void set_reg(assembly_t *assembly, int reg, int i_operand, int number_of_operands);
+
+/**
+Sets the addressing mode for an operand.
+	@param assembly: A pointer to the assembly structure.
+	@param addressing: The determined addressing mode.
+	@param i_operand: The index of the operand in the current instruction.
+	@param number_of_operands: The total number of operands in the instruction.
+*/
+void set_addressing(assembly_t *assembly, int addressing, int i_operand, int number_of_operands);
 
 /** 
 Resets the Instruction Counter (IC) to the initial value.

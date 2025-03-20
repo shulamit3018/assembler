@@ -1,17 +1,6 @@
 #include <stdio.h>
 #include "error_codes.h"
 
-char *get_operand_details(int i_operand, int n_operand) {
-	/* If it is the first operand of two, it is the source operand */
-	if (n_operand == 2 && i_operand == 0) {
-		return "in source operand";
-	}
-	/* Otherwise, it is the destination operand */
-	else {
-		return "in destination operand";
-	}
-}
-
 int is_error(ErrorCode error, int * error_state, char *filename, int line_number, char *error_context) {
 	if (error == SUCCESS) {
 		return 0;

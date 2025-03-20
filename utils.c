@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "utils.h"
 
@@ -58,6 +59,25 @@ ErrorCode get_comma(char *line, char ** next_word) {
     }
 
     return SUCCESS;
+}
+
+ErrorCode get_number(char *word, int *value) {
+    char *endptr;
+    long result = strtol(word, &endptr, 10);
+
+    if (endptr == word && *endptr != '\0') {
+		return ERR_NUMBER_ILLEGAL;
+    }
+
+	/* Ensure the number is within the acceptable range for the assembler */
+    if ((result >= -(1 << 20)) && (result < (1 << 20))) {
+		*value = (int)result;
+		return SUCCESS;
+	}
+	else {
+		return ERR_NUMBER_OUT_OF_RANGE;
+	}
+
 }
 
 FILE * open_file (char *filename, char *format) {

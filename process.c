@@ -1,5 +1,4 @@
 #include <string.h>
-#include <stdlib.h>
 #include "process.h"
 #include "utils.h"
 #include "symbols.h"
@@ -360,7 +359,7 @@ ErrorCode process_instruction(
 	/* Process operands */
 	for (i = 0; i < instruction->number_of_operands; i++) {
 		if (error_context) {
-			strcpy(error_context, get_operand_details(i, instruction->number_of_operands));
+			strcpy(error_context, get_operand_context(i, instruction->number_of_operands));
 		}
 
 		/* Extract operand */
@@ -469,49 +468,3 @@ ErrorCode process_operand(
 
 	return SUCCESS;
 }
-
-/* Helper Functions ------------------------------------------------- */
-
-void set_reg(assembly_t *assembly, int reg, int i, int number_of_operands) {
-	/* With two operands, the first one is osource, otherwise it is destination */
-	if (number_of_operands == 2 && i == 0) {
-		assembly->instruction.src_reg = reg;
-		assembly->instruction.src_addr = REG;
-	}
-	else {
-		assembly->instruction.dst_reg = reg;
-		assembly->instruction.dst_addr = REG;
-	}
-}
-
-void set_addressing(assembly_t *assembly, int addressing, int i, int number_of_operands) {
-	/* With two operands, the first one is osource, otherwise it is destination */
-	if (number_of_operands == 2 && i == 0) {
-		assembly->instruction.src_addr = addressing;
-	}
-	else {
-		assembly->instruction.dst_addr = addressing;
-	}
-}
-
-ErrorCode get_number(char *word, int *value) {
-    char *endptr;
-    long result = strtol(word, &endptr, 10);
-
-    if (endptr == word && *endptr != '\0') {
-		return ERR_NUMBER_ILLEGAL;
-    }
-
-	/* Ensure the number is within the acceptable range for the assembler */
-    if ((result >= -(1 << 20)) && (result < (1 << 20))) {
-		*value = (int)result;
-		return SUCCESS;
-	}
-	else {
-		return ERR_NUMBER_OUT_OF_RANGE;
-	}
-
-}
-
-
-

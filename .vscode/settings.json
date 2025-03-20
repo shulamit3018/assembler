@@ -1,0 +1,16 @@
+{
+    "C_Cpp.default.compilerPath": "c:\\msys64\\ucrt64\\bin\\gcc.exe",
+    "files.associations": {
+        "array": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "iterator": "c",
+        "string_view": "c",
+        "format": "c",
+        "initializer_list": "c",
+        "span": "c",
+        "text_encoding": "c"
+    }
+}

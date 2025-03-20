@@ -104,4 +104,14 @@ Validates if the given addressing method is allowed for an instruction operand.
 */
 int is_valid_addressing(addressing_t addressing, addressing_t allowed_addressing[]);
 
+/**
+Retrieves a formatted string describing the operand context based on operand index 
+and total number of operands.
+Used when reporting errors related to operands.
+    @param i_operand The index of the operand being processed.
+    @param n_operand The total number of expected operands.
+    @return A string describing the operand position (e.g., "first operand").
+*/
+char *get_operand_context(int i_operand, int n_operand);
+
 #endif /* LANGUAGE_H */

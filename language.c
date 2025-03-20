@@ -107,3 +107,14 @@ int is_valid_addressing(addressing_t addressing, addressing_t allowed_addressing
 	}
 	return 0;
 }
+
+char *get_operand_context(int i_operand, int n_operand) {
+	/* If it is the first operand of two, it is the source operand */
+	if (n_operand == 2 && i_operand == 0) {
+		return "in source operand";
+	}
+	/* Otherwise, it is the destination operand */
+	else {
+		return "in destination operand";
+	}
+}

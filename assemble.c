@@ -82,6 +82,27 @@ ErrorCode add_data(assembly_t assembly) {
     }
     return SUCCESS;
 }
+void set_reg(assembly_t *assembly, int reg, int i, int number_of_operands) {
+	/* With two operands, the first one is osource, otherwise it is destination */
+	if (number_of_operands == 2 && i == 0) {
+		assembly->instruction.src_reg = reg;
+		assembly->instruction.src_addr = REG;
+	}
+	else {
+		assembly->instruction.dst_reg = reg;
+		assembly->instruction.dst_addr = REG;
+	}
+}
+
+void set_addressing(assembly_t *assembly, int addressing, int i, int number_of_operands) {
+	/* With two operands, the first one is osource, otherwise it is destination */
+	if (number_of_operands == 2 && i == 0) {
+		assembly->instruction.src_addr = addressing;
+	}
+	else {
+		assembly->instruction.dst_addr = addressing;
+	}
+}
 
 void reset_IC() {
     IC = IC_BASE;
